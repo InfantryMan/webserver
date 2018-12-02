@@ -3,8 +3,9 @@ MAINTAINER Rustam Migranov
 RUN apt-get -y update
 RUN apt-get install -y python3
 
-ADD . .
+ADD . ./server/
+ADD httpd.conf /etc/httpd.conf
 
 EXPOSE 80
 
-CMD python3 launch.py
+CMD python3 ./server/launch.py

@@ -12,5 +12,11 @@
 2. ``` python3 ./launch.py --ncpu=NCPU --root=ROOT ```
    В этом случае количество процессов и root - директория статики можно определить аргументами при запуске сервера. Если аргументы не заданы, то данные конфигурации будут браться из файла ```/etc/httpd.conf```.
    
+### Запуск docker контейнера с сервером:
+1. ```sudo docker build -t server-httpd https://github.com/InfantryMan/webserver.git``` - создание образа.
+2. ```sudo docker run -p 8000:80 -v /var/www/html:/var/www/html:ro --name server-httpd -t server-httpd``` - запуск контейнера. Проброс 8000 порта хоста на 80 порт контейнера.
+  
 ##### Путь к файлу ```httpd.conf``` можно поменять в файле launch.py
 ##### Сервер показывает такой же порядок RPS, как nginx.
+
+## Have fun!
