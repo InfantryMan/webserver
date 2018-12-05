@@ -4,7 +4,6 @@ RUN apt-get -y update
 RUN apt-get install -y python3
 
 ADD . ./server/
-ADD httpd.conf /etc/httpd.conf
 
 EXPOSE 80
 

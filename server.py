@@ -68,6 +68,8 @@ class Server:
         server_socket.listen(self.queue)
 
         logger.info('Listening on %s:%d...' % self.address_port)
+        logger.info('Number of the processes: %d' % self.ncpu)
+        logger.info('Files root: %s' % self.root)
 
         for worker in range(self.ncpu):
             pid = os.fork()

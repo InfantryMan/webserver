@@ -3,11 +3,16 @@ import re
 
 
 class Config:
+    ADDRESS = '0.0.0.0'
+    PORT = 80
+    QUEUE = 8
+    RECEIVE_DATA_SIZE = 1024
+
     def __init__(self, config_path='/etc/httpd.conf'):
         self.config_path = config_path
         self.cpu_number = self.root = None
         if not os.path.exists(self.config_path):
-            print('No config file at path: %s' % self.config_path)
+            raise ValueError('No config file at path: %s' % self.config_path)
         else:
             try:
                 with open(self.config_path, 'r') as file:
@@ -20,8 +25,8 @@ class Config:
                             options[key] = value
                     self.cpu_number = int(options['cpu_limit'])
                     self.root = options['document_root']
-                    self.address_port = (options['address'], int(options['port']))
-                    self.queue = int(options['queue'])
-                    self.receive_data_size = int(options['receive_data_size'])
+                    self.address_port = (self.ADDRESS, self.PORT)
+                    self.queue = self.QUEUE
+                    self.receive_data_size = self.RECEIVE_DATA_SIZE
             except Exception as e:
-                print('Error in reading file:\n %s' % e)
+                raise ValueError('Error in reading file:\n %s' % e)
